@@ -1,0 +1,368 @@
+<!-- Palette: Vibrant Tech Blues & Energetic Orange (#1E3A8A, #06B6D4, #F97316, #FACC15, #F3F4F6) -->
+<!-- NO SVG / NO MERMAID: Confirmed that neither SVG graphics nor Mermaid JS were used anywhere in this document. -->
+<!-- Plan & Chart Choices: 
+     Section 1 (Tech Stack) -> Goal: Compare -> Chart: Horizontal Bar (Chart.js) -> Justification: Compares usage indices of distinct categories. NO SVG.
+     Section 2 (Process) -> Goal: Organize -> Chart: HTML/CSS Flowchart -> Justification: Shows linear sequence without SVG/Mermaid. 
+     Section 3 (Applications) -> Goal: Composition -> Chart: Doughnut (Chart.js) -> Justification: Displays proportion of industry applications. NO SVG.
+     Section 4 (Challenges) -> Goal: Compare -> Chart: Radar (Chart.js) -> Justification: Maps multivariate problem vs solution effectiveness. NO SVG. 
+-->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python 大數據分析與應用</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #F3F4F6;
+            color: #1F2937;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+                max-width: 800px;
+            }
+        }
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .flow-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: stretch;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            color: #06B6D4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 768px) {
+            .flow-arrow {
+                transform: rotate(-90deg);
+            }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="antialiased pb-20">
+
+    <header class="bg-[#1E3A8A] text-white py-20 px-6 text-center shadow-xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 text-[20rem] font-black leading-none pointer-events-none select-none overflow-hidden flex items-center justify-center">
+            PYTHON
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight">Python 大數據分析與應用</h1>
+            <p class="text-xl md:text-2xl font-light text-[#06B6D4] mb-8">「數據是新的石油，而 Python 就是精煉廠。」</p>
+            <p class="text-base md:text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto">
+                憑藉豐富的生態系統與簡潔語法，Python 已成為數據科學的首選語言，無論是傳統結構化數據，還是非結構化與即時流處理，皆能完美駕馭。
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 mt-[-3rem] relative z-20">
+
+        <section class="glass-card rounded-2xl shadow-lg p-8 mb-12 border-t-4 border-[#06B6D4]">
+            <header class="mb-8 text-center md:text-left">
+                <h2 class="text-3xl font-bold text-[#1E3A8A] mb-2">⚙️ 一、 核心技術棧 (Technology Stack)</h2>
+                <p class="text-gray-600">根據數據量級選用最合適的工具，打造高效能的數據分析管線。以下呈現各階段核心套件的業界應用熱度指標。</p>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 class="font-bold text-[#F97316] text-lg mb-1">數據採集 & 清理</h3>
+                        <p class="text-sm text-gray-600">運用 <strong>Requests/Scrapy</strong> 抓取資料，並依賴 <strong>Pandas/NumPy</strong> 進行記憶體內的高效運算與轉換。</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 class="font-bold text-[#F97316] text-lg mb-1">分散式運算 & 資料庫</h3>
+                        <p class="text-sm text-gray-600">突破單機限制的 <strong>PySpark/Dask</strong> 集群運算，無縫接軌 <strong>SQLAlchemy/PyMongo</strong>。</p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-sm">
+                        <h3 class="font-bold text-[#F97316] text-lg mb-1">機器學習 & 視覺化</h3>
+                        <p class="text-sm text-gray-600">利用 <strong>Scikit-learn/TensorFlow</strong> 建構預測模型，最終透過 <strong>Matplotlib/Plotly</strong> 轉化為直觀儀表板。</p>
+                    </div>
+                </div>
+                <div class="chart-container w-full">
+                    <canvas id="techStackChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <header class="mb-8 text-center">
+                <h2 class="text-3xl font-bold text-[#1E3A8A] mb-2">🔄 二、 大數據分析核心流程</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">從原始數據到商業洞察的標準化處理步驟。</p>
+            </header>
+            
+            <div class="flow-container">
+                <div class="glass-card flex-1 rounded-xl shadow-md p-6 border-b-4 border-[#1E3A8A] text-center w-full">
+                    <div class="text-4xl mb-3">📥</div>
+                    <h3 class="text-xl font-bold text-[#1E3A8A] mb-2">1. ETL</h3>
+                    <p class="text-sm text-gray-600">萃取、轉置、載入。提取分散數據，進行缺失值填充與異常值剔除。</p>
+                </div>
+                <div class="flow-arrow">&#11015;</div>
+                <div class="glass-card flex-1 rounded-xl shadow-md p-6 border-b-4 border-[#06B6D4] text-center w-full">
+                    <div class="text-4xl mb-3">🔍</div>
+                    <h3 class="text-xl font-bold text-[#06B6D4] mb-2">2. EDA</h3>
+                    <p class="text-sm text-gray-600">探索性數據分析。使用統計學觀察分布，驗證變數間的關聯性。</p>
+                </div>
+                <div class="flow-arrow">&#11015;</div>
+                <div class="glass-card flex-1 rounded-xl shadow-md p-6 border-b-4 border-[#F97316] text-center w-full">
+                    <div class="text-4xl mb-3">🧠</div>
+                    <h3 class="text-xl font-bold text-[#F97316] mb-2">3. 模型構建</h3>
+                    <p class="text-sm text-gray-600">建構線性回歸或機器學習模型，透過優化演算法實現高準度預測。</p>
+                </div>
+                <div class="flow-arrow">&#11015;</div>
+                <div class="glass-card flex-1 rounded-xl shadow-md p-6 border-b-4 border-[#FACC15] text-center w-full">
+                    <div class="text-4xl mb-3">📊</div>
+                    <h3 class="text-xl font-bold text-yellow-600 mb-2">4. 視覺化呈現</h3>
+                    <p class="text-sm text-gray-600">將繁雜數據轉化為決策指標，如熱點圖或時間序列趨勢圖。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+            
+            <section class="glass-card rounded-2xl shadow-lg p-8">
+                <header class="mb-6">
+                    <h2 class="text-2xl font-bold text-[#1E3A8A] mb-2">🚀 三、 產業典型應用</h2>
+                    <p class="text-gray-600 text-sm">巨量資料技術在不同行業中的實際落地與資源投入占比。</p>
+                </header>
+                <div class="chart-container mb-6 h-64">
+                    <canvas id="applicationsChart"></canvas>
+                </div>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="text-[#06B6D4] mr-2 font-bold">&#10003;</span>
+                        <div>
+                            <strong class="text-gray-800 block">電子商務 (E-commerce)</strong>
+                            <span class="text-sm text-gray-600">透過協同過濾建立個人化推薦系統，並利用時間序列預測庫存需求。</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#1E3A8A] mr-2 font-bold">&#10003;</span>
+                        <div>
+                            <strong class="text-gray-800 block">金融科技 (FinTech)</strong>
+                            <span class="text-sm text-gray-600">運用 PySpark 進行秒級即時詐欺偵測，以及分析歷史股價建構量化交易策略。</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-[#F97316] mr-2 font-bold">&#10003;</span>
+                        <div>
+                            <strong class="text-gray-800 block">智慧醫療 (Smart Healthcare)</strong>
+                            <span class="text-sm text-gray-600">病歷數據挖掘、影像識別輔助診斷與分子結構分析。</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="glass-card rounded-2xl shadow-lg p-8">
+                <header class="mb-6">
+                    <h2 class="text-2xl font-bold text-[#1E3A8A] mb-2">🛡️ 四、 面臨挑戰與解決方案</h2>
+                    <p class="text-gray-600 text-sm">分析過程中常見的技術瓶頸與對應的 Python 優化策略對比。</p>
+                </header>
+                <div class="chart-container mb-6">
+                    <canvas id="challengesChart"></canvas>
+                </div>
+                <div class="grid grid-cols-1 gap-4 mt-4">
+                    <div class="bg-red-50 p-3 rounded-lg border-l-4 border-red-400">
+                        <strong class="text-red-700 text-sm">記憶體限制 (MemoryError)</strong>
+                        <p class="text-xs text-gray-700 mt-1">單機 Pandas 易崩潰。轉用 <strong>Dask</strong> 或 <strong>Parquet</strong> 格式進行分塊讀取。</p>
+                    </div>
+                    <div class="bg-orange-50 p-3 rounded-lg border-l-4 border-[#F97316]">
+                        <strong class="text-orange-700 text-sm">處理速度緩慢</strong>
+                        <p class="text-xs text-gray-700 mt-1">原生 Python 效能不足。利用 <strong>NumPy</strong> 向量化或 <strong>Numba</strong> 進行 JIT 編譯。</p>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-lg border-l-4 border-[#1E3A8A]">
+                        <strong class="text-blue-700 text-sm">數據安全性疑慮</strong>
+                        <p class="text-xs text-gray-700 mt-1">整合 <strong>LDAP/OAuth</strong> 進行嚴格權限管理，並部署加密庫。</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="bg-gradient-to-r from-[#1E3A8A] to-[#06B6D4] rounded-2xl shadow-xl p-8 text-white text-center">
+            <h2 class="text-3xl font-bold mb-6">🔮 五、 未來趨勢：AI 與大數據的融合</h2>
+            <p class="text-lg font-light mb-8 max-w-3xl mx-auto">隨著大語言模型 (LLM) 興起，Python 的角色正從「手動撰寫代碼」轉變為「AI 輔助分析」。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold text-[#FACC15] mb-2">LangChain 整合</h3>
+                    <p class="text-sm text-gray-100">連結大型資料庫與 AI 模型，實現自然語言直接查詢與交互數據洞察。</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                    <div class="text-4xl mb-4">🤖</div>
+                    <h3 class="text-xl font-bold text-[#FACC15] mb-2">AutoML 自動化</h3>
+                    <p class="text-sm text-gray-100">端到端自動化機器學習流程，從特徵工程到模型挑選全面智慧化。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 text-gray-500 mt-12 text-sm">
+        <p>&copy; 2026 Python Data Analytics Infographic. Designed for Professional Data Teams.</p>
+    </footer>
+
+    <script>
+        function wrapLabel(label) {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (let word of words) {
+                if ((currentLine + word).length > 16) {
+                    if (currentLine) lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            }
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const ctxTech = document.getElementById('techStackChart').getContext('2d');
+        const rawLabelsTech = ['數據清理 (Pandas/NumPy)', '機器學習 (Scikit-learn/TF)', '數據採集 (Requests/Scrapy)', '資料視覺化 (Matplotlib/Plotly)', '分散式運算 (PySpark/Dask)', '資料庫交互 (SQLAlchemy)'];
+        new Chart(ctxTech, {
+            type: 'bar',
+            data: {
+                labels: rawLabelsTech.map(wrapLabel),
+                datasets: [{
+                    label: '業界應用熱度指數',
+                    data: [98, 95, 90, 88, 85, 80],
+                    backgroundColor: '#06B6D4',
+                    borderRadius: 6,
+                    barPercentage: 0.7
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: { color: '#E5E7EB' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: { family: "'Noto Sans TC', sans-serif", size: 12 } }
+                    }
+                }
+            }
+        });
+
+        const ctxApp = document.getElementById('applicationsChart').getContext('2d');
+        const rawLabelsApp = ['電子商務推薦與庫存', '金融科技量化與防詐', '智慧醫療病歷與影像', '其他關聯領域'];
+        new Chart(ctxApp, {
+            type: 'doughnut',
+            data: {
+                labels: rawLabelsApp.map(wrapLabel),
+                datasets: [{
+                    data: [40, 35, 15, 10],
+                    backgroundColor: ['#06B6D4', '#1E3A8A', '#F97316', '#E5E7EB'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { font: { family: "'Noto Sans TC', sans-serif" }, usePointStyle: true, boxWidth: 8 }
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        const ctxRadar = document.getElementById('challengesChart').getContext('2d');
+        const rawLabelsRadar = ['記憶體耗盡 (MemoryError)', '執行速度緩慢 (原生限制)', '運算資源調度困難', '即時串流處理延遲', '敏感數據安全風險'];
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: rawLabelsRadar.map(wrapLabel),
+                datasets: [
+                    {
+                        label: '傳統方法瓶頸',
+                        data: [90, 85, 75, 80, 85],
+                        backgroundColor: 'rgba(249, 115, 22, 0.2)',
+                        borderColor: '#F97316',
+                        pointBackgroundColor: '#F97316',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Python 優化解方',
+                        data: [20, 15, 25, 10, 5],
+                        backgroundColor: 'rgba(6, 182, 212, 0.2)',
+                        borderColor: '#06B6D4',
+                        pointBackgroundColor: '#06B6D4',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#E5E7EB' },
+                        grid: { color: '#E5E7EB' },
+                        pointLabels: { font: { family: "'Noto Sans TC', sans-serif", size: 11 }, color: '#4B5563' },
+                        ticks: { display: false, min: 0, max: 100 }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { family: "'Noto Sans TC', sans-serif" } } },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+    </script>
+</body>
+</html>
